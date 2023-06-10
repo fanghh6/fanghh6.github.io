@@ -1,304 +1,152 @@
-body, html, h1, h2 {
+/* 清除内、外间距 */
+* {
     margin: 0;
     padding: 0;
-    font-family: "SF Pro TC","SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
-    color: #333;
-  }
-  
-  a, a:visited {
-    color: #828282;
+}
+ 
+/* 去除a标签的下划线 */
+a {
     text-decoration: none;
-  }
-  
-  a:hover, a.active {
-    color: #4183c4;
-  }
-  
-  #header {
-    background-color: #2d2d2d;
-    color: white;
-    text-align: center;
-  }
-  
-  #header a {
-    color: white;
-  }
-  
-  #body {
-    width: 1024px;
-    margin: 0 auto;
-    margin-top: 20px;
-  }
-  
-  #body:after {
-    content: '';
-    clear: both;
-    display: block;
-  }
-  
-  #sidebar {
-    float: left;
-    width: 327px;
-    margin-left: 20px;
-  }
-  
-  #sidebar:after {
-    content: '';
-    clear: both;
-    display: block;
-  }
-  
-  .col {
-    width: 50%;
-    float: left;
-  }
-  
-  .option-block {
-    padding: 5px;
-    border-bottom: 3px dashed #D0CCCC;
-  }
-  
-  #bits {
-    width:100px;
-  }
-  
-  .menu {
-    padding: 0;
-    margin: 0;
-  }
-  
-  .menu li {
+}
+ 
+/* 去除li标签的序列符号（小黑点） */
+li {
     list-style: none;
-  }
-  
-  .menu li a, .menu-group {
-    display: block;
-    min-height: 30px;
-    line-height: 30px;
-    padding-left: 20px;
-  }
-  
-  .menu-group {
-    font-weight: bold;
-  }
-  
-  .menu li a:hover, .menu li a.active {
-    padding-left: 19px;
-    border-left: 1px solid #828282
-  }
-  
-  #index:after {
-    content: '';
-    clear: both;
-    display: block;
-  }
-  
-  #index .menu {
-    float: left;
-    min-width: 200px;
-  }
-  
-  #main {
-    float: left;
-    width: 677px;
-  }
-  
-  #main h1 {
-    margin: 10px 0;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .description {
-    color: gray;
-    margin: 10px 0;
-  }
-  
-  .submit {
-    height: 60px;
-    line-height: 50px;
+}
+ 
+body {
+    background-image: linear-gradient(to right, #3e9597, #214c52);
+}
+ 
+.box {
+    /* 分布式布局 */
+    display: flex;
+    justify-self: center;
+}
+
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ 
+/* 登录、注册外div公用样式 */
+.login,
+.register {
+    width: 20rem;
+    height: 25.5rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    margin-top: 5rem;
+}
+ 
+/* 登录、注册顶部div共同样式 */
+.login_top,.register_top{
+    width: 20rem;
+    height: 12rem;
+    color: white;
+    border-radius: 0.5rem 0.5rem 0 0;
     text-align: center;
-  }
-  
-  #droppable-zone {
-    border: 10px dashed #ccc;
-    height: 200px;
-    width: 650px;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  #droppable-zone.hover {
-    border: 10px dashed #aaa;
-  }
-  
-  #droppable-zone-wrapper {
-    display: table;
-    height: 100%;
-    width: 100%;
-  }
-  
-  #droppable-zone-text {
-    display: table-cell;
+}
+ 
+.login_top{
+    background: #214c52;
+}
+.register_top{
+    background: #3e9597;
+}
+ 
+.login_top img {
+    width: 5.5rem;
+    height: 5.5rem;
+    margin-top: 2rem;
+}
+ 
+.register_top {
+    padding-top: 2.5rem;
+    /* 添加内间距防止div扩充 */
+    box-sizing:border-box;
+}
+.register_top div{
+    width: 5.5rem;
+    height: 5.5rem;
+    background: white;
+    border-radius: 10rem;
+    color: silver;
+    font-size: 4rem;
+    margin: 0 auto;
     text-align: center;
-    vertical-align: middle;
-    font-size: 33px;
-    overflow: hidden;
-  }
-  
-  .droppable-file {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-  }
-  
-  textarea {
-    /*font-family:Consolas,'Lucida Console','DejaVu Sans Mono',monospace;*/
-    font-size: 12pt;
-    max-width: 95%;
-    width: 95%;
-    height: 200px;
-    border: 3px double #ccc;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    background: #e0e0e0; /* Old browsers */
-    background: -moz-linear-gradient(top, #e0e0e0 0%, #ffffff 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e0e0e0), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top, #e0e0e0 0%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top, #e0e0e0 0%,#ffffff 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top, #e0e0e0 0%,#ffffff 100%); /* IE10+ */
-    background: linear-gradient(to bottom, #e0e0e0 0%,#ffffff 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0e0e0', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
-  }
-  
-  ::-webkit-input-placeholder { 
+    line-height: 5.5rem;
+}
+ 
+.login_bottom,.register_bottom{
     text-align: center;
-    line-height: 200px;
-    font-size: 16pt;
-  }
-  ::-moz-placeholder { 
-    text-align: center;
-    line-height: 200px;
-    font-size: 16pt;
-  }
-  :-ms-input-placeholder{ 
-    text-align: center;
-    line-height: 200px;
-    font-size: 16pt;
-  }
-  
-  #footer {
-    margin-top: 40px;
-    padding-top: 40px;
-    padding-bottom: 40px;
-    font-size: 12px;
-    line-height: 1.5;
-    color: #777;
-    border-top: 1px solid #eee;
-    text-align: center;
-  }
-  
-  .btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-        touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-  }
-  .btn:focus,
-  .btn:active:focus,
-  .btn.active:focus,
-  .btn.focus,
-  .btn:active.focus,
-  .btn.active.focus {
-    outline: thin dotted;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px;
-  }
-  .btn:hover,
-  .btn:focus,
-  .btn.focus {
-    color: #333;
-    text-decoration: none;
-  }
-  .btn:active,
-  .btn.active {
-    background-image: none;
-    outline: 0;
-    -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-            box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
-  }
-  .btn.disabled,
-  .btn[disabled],
-  fieldset[disabled] .btn {
-    pointer-events: none;
-    cursor: not-allowed;
-    filter: alpha(opacity=65);
-    -webkit-box-shadow: none;
-            box-shadow: none;
-    opacity: .65;
-  }
-  .btn-default {
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;
-  }
-  .btn-default:hover,
-  .btn-default:focus,
-  .btn-default.focus,
-  .btn-default:active,
-  .btn-default.active,
-  .open > .dropdown-toggle.btn-default {
-    color: #333;
-    background-color: #e6e6e6;
-    border-color: #adadad;
-  }
-  .btn-default:active,
-  .btn-default.active,
-  .open > .dropdown-toggle.btn-default {
-    background-image: none;
-  }
-  .btn-default.disabled,
-  .btn-default[disabled],
-  fieldset[disabled] .btn-default,
-  .btn-default.disabled:hover,
-  .btn-default[disabled]:hover,
-  fieldset[disabled] .btn-default:hover,
-  .btn-default.disabled:focus,
-  .btn-default[disabled]:focus,
-  fieldset[disabled] .btn-default:focus,
-  .btn-default.disabled.focus,
-  .btn-default[disabled].focus,
-  fieldset[disabled] .btn-default.focus,
-  .btn-default.disabled:active,
-  .btn-default[disabled]:active,
-  fieldset[disabled] .btn-default:active,
-  .btn-default.disabled.active,
-  .btn-default[disabled].active,
-  fieldset[disabled] .btn-default.active {
-    background-color: #fff;
-    border-color: #ccc;
-  }
-  .btn-default .badge {
-    color: #fff;
-    background-color: #333;
-  }
-  
+}
+ 
+/* 登录、注册表单共同样式 */
+.login_bottom .input,.register_bottom .input{
+    width: 17.5rem;
+    height: 2.5rem;
+    margin-top: 3rem;
+    padding-left: 0.6rem;
+    border-radius: 0.6rem;
+    border: 0.1rem solid silver;
+    /* 去除表单点击后出现的边框 */
+    outline: none;
+    color: reb(107,107,107);
+}
+ 
+.login_bottom p{
+    font-size: 0.8rem;
+    margin-top: 1rem;
+}
+ 
+/* 使复选框与后面文字水平对齐 */
+.login_bottom p input{
+    vertical-align: middle;/* vertical 垂直的  middle 中间 */
+}
+ 
+.login_bottom p span{
+    margin-right: 0.5rem;
+    color: #757575;
+}
+ 
+.login_bottom p a{
+    color: #214c52;
+}
+ 
+.register_bottom p{
+    font-size: 0.8rem;
+    margin-top: 1rem;
+}
+.register_bottom p span{
+    margin-right: 0.5rem;
+    color: #757575;
+}
+ 
+.register_bottom p a{
+    color: #214c52;
+}
+ 
+/* 登录、注册按钮共同样式 */
+.login_bottom button,.register_bottom button{
+    width: 18rem;
+    height: 2.8rem;
+    color: white;
+    margin-top: 2rem;
+    border-radius: 0.6rem;
+    border: none;
+}
+ 
+.login_bottom button{
+    background: #214c52;
+    margin-top: 1.6rem;
+}
+.register_bottom button{
+    background: #3e9597;
+}
+ 
+/* 鼠标滑过按钮出现阴影效果 */
+.login_bottom button:hover,.register_bottom button:hover{
+    box-shadow: 0.2rem 0.2rem 0 rgba(0,0,0,0.3);
+}
