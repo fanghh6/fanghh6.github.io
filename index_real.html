@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>chen77.love</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/crypto-js/core.min.js"></script>
+    <script src="js/crypto-js/enc-base64.min.js"></script>
+    <script src="js/crypto-js/md5.min.js"></script>
+    <script src="js/crypto-js/evpkdf.min.js"></script>
+    <script src="js/crypto-js/cipher-core.min.js"></script>
+    <script src="js/crypto-js/aes.min.js"></script>
+    <script src="js/crypto-js/pad-pkcs7.min.js"></script>
+    <script src="js/crypto-js/mode-ecb.min.js"></script>
+    <script src="js/crypto-js/enc-utf8.min.js"></script>
+    <script src="js/crypto-js/enc-hex.min.js"></script>
+    <script src="js/crypto-js/x64-core.min.js"></script>
+    <script src="js/crypto-js/sha512.min.js"></script>
+    </head>
+    <body>
+        <div class="parent">
+            <div id="div1" style="display: none;" class="login">
+                <div class="login_top">
+                    <img src="img/favicon.png" alt="">
+                    <h2>Hi 77</h2>
+                </div>
+                <div class="login_bottom">
+                        <input id="input_pwd" type="Password" class="input" placeholder="请输入密码" />
+                        <button id="btn_confirm" type="button" onclick="btn_confirm_click()" >确定</button>
+                </div>
+            </div>
+            <div id="div2">
+            </div>
+        </div>
+    </body>
+
+    <script type="text/javascript">
+        function getQueryString(name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return "";
+        }
+
+        var inputPwd = getQueryString('pwd');
+        
+        var encryptedContent = '1FhB4msfDhy3qdTme4Ss2pcah0GppiMrqCPlEJg+T69/JuwpXOXdjRjwb6yTtrr8jQybjyBrUvWXpBr309z9Y/evj94z8DAXxNGoQPZuqXu9KlgKy9NGP205aLGVuFq5MiFljkz9GjrWoPW24DrIltfzWtcYERXGEUrHn34qDXCY9fnbpfns2nNc/pPudW9w';
+        var aesKey = CryptoJS.enc.Utf8.parse(CryptoJS.MD5(inputPwd + '2e7562e121904df1ae96b4e0416330cb').toString());
+        var aesIV = CryptoJS.enc.Utf8.parse(CryptoJS.MD5(inputPwd + '379db98e13044c709c1806f0479e4f07').toString());
+        
+        if(CryptoJS.SHA512(inputPwd + 'f02d2cc402a24bcaac1ac5e5242d58b4').toString() == '9c9b8f9c95807b5b45653c56ba72b28f6b453e0d0b34e17a8b12ddea17db2aacb0eaf4bc92687edc4a2ba70fddd3bbc81e944ef12e44881eece44e6e7a8f7ccd') {
+            var decrypted = CryptoJS.AES.decrypt(encryptedContent, aesKey, {
+                iv: aesIV,
+                mode: CryptoJS.mode.ECB,
+                padding: CryptoJS.pad.Pkcs7
+            });
+            
+            var decryptedContent = decrypted.toString(CryptoJS.enc.Utf8);
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").innerHTML = decryptedContent;
+        } else {
+            document.getElementById("div1").style.display = 'block';
+        }
+
+        function btn_confirm_click() {
+            window.location.href = window.location.href.split("?")[0] + "?pwd=" + document.getElementById("input_pwd").value;
+        }
+        
+        document.onkeydown=keyDownSearch;
+        function keyDownSearch(e) {
+            var theEvent = e || window.event;
+            var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+            if (code == 13) {
+                btn_confirm_click();
+                return false;
+            }
+            return true;
+        }
+
+        document.getElementById("input_pwd").focus();
+    </script>
+</html>
