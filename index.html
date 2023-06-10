@@ -1,14 +1,66 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>菜鸟教程(runoob.com)</title>
-</head>
-<body>
- 
-<h1>我的第一个标题</h1>
- 
-<p>我的第一个段落。</p>
- 
-</body>
+    <head>
+    <meta charset="utf-8">
+    <title>chen77.love</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/crypto-js/core.min.js"></script>
+    <script src="js/crypto-js/enc-base64.min.js"></script>
+    <script src="js/crypto-js/md5.min.js"></script>
+    <script src="js/crypto-js/evpkdf.min.js"></script>
+    <script src="js/crypto-js/cipher-core.min.js"></script>
+    <script src="js/crypto-js/aes.min.js"></script>
+    <script src="js/crypto-js/pad-pkcs7.min.js"></script>
+    <script src="js/crypto-js/mode-ecb.min.js"></script>
+    <script src="js/crypto-js/enc-utf8.min.js"></script>
+    <script src="js/crypto-js/enc-hex.min.js"></script>
+    <script src="js/crypto-js/x64-core.min.js"></script>
+    <script src="js/crypto-js/sha512.min.js"></script>
+    </head>
+    <body>
+        <div id="div1" style="display: none;" >
+            <input id="input_pwd" type="password" placeholder="密码" />
+            <input id="btn_confirm" type="button" value="确定" onclick="btn_confirm_click()" />
+        </div>
+        <div id="div2">
+        </div>
+    </body>
+
+    <script>
+        function getQueryString(name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return "";
+        }
+
+        var inputPwd = getQueryString('pwd');
+        
+        var pwdSha512Salt = 'askjldhflkjglakjasdlkjhflkajg';
+        
+        var encryptedContent = '5CgnMNzooWyzbN3NPdKgZGMoNzMWaLTQ8C/mXmI5PBCTI5sSJIw3CQtQZV2SN04+LZReSPZpMCmSTiN72wg1SMyOeYFN2YXsD1DOm600JNVilDUJ+Ylqc5xFK6PEJckeqKEdPpgFMPRm0uwr24g+Fw==';
+        var aesKey = CryptoJS.enc.Utf8.parse('1234123412341234');
+        var aesIV = CryptoJS.enc.Utf8.parse('5678567856785678');
+        
+        if(CryptoJS.SHA512(inputPwd + pwdSha512Salt).toString() == 'f6cfe57b3b029e9e21f1205f298509321c21b98b484b3c98c1d5574ef72a5119c5faadbe208e882c75412ed64dcb773209dadf85ffeddb604144e8b312aa6f43') {
+            var decrypted = CryptoJS.AES.decrypt(encryptedContent, aesKey, {
+                iv: aesIV,
+                mode: CryptoJS.mode.ECB,
+                padding: CryptoJS.pad.Pkcs7
+            });
+            
+            var decryptedContent = decrypted.toString(CryptoJS.enc.Utf8);
+            document.getElementById("div1").style.display = 'none';
+            document.getElementById("div2").innerHTML = decryptedContent;
+        } else {
+            document.getElementById("div1").style.display = 'block';
+            console.log(2);
+        }
+
+        function btn_confirm_click() {
+            window.location.href = window.location.href.split("?")[0] + "?pwd=" + document.getElementById("input_pwd").value;
+        }
+    </script>
 </html>
